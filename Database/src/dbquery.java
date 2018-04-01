@@ -17,7 +17,8 @@ public class dbquery {
 		
 		String search = args[0];
 		String pagesize = args[1];
-		StringBuilder sb = new StringBuilder();StringTokenizer strtok;
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer strtok;
 		ArrayList<String> found = new ArrayList<String>();
 		
 		//locations of each file
@@ -30,23 +31,29 @@ public class dbquery {
         	BufferedReader br = new BufferedReader(new FileReader(file));
         	String line;
         	
+        	//go through file until no more lines
         	while((line=br.readLine()) != null)
         	{
         		strtok = new StringTokenizer(line, "*");
         		
+        		//checking each record
         		while(strtok.hasMoreTokens())
         		{
-        			sb.append(strtok.nextToken());
+        			sb = new StringBuilder(strtok.nextToken());
         			
+        			//converting to string to check for contains
         			String check = sb.toString().toLowerCase();
         			String keyword = search.toLowerCase().trim();
         			
-        			if(check.indexOf(keyword)>=0)
+        			//there was a bug here i could no figure out why this didn't work
+        			//it only worked for singular characters for an odd reason
+        			if(check.contains(keyword))
         			{
         				found.add(check);
         			}
         		}
         		
+        		//check if anything was found
         		if(found.size() >= 1)
         		{
         			for(int i = 0 ; i < found.size() ; i++)
