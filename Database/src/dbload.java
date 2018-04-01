@@ -1,9 +1,12 @@
 import java.awt.List;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,15 +23,14 @@ public class dbload {
           
         File file = new File(fileLocation);
         String regname = null;
+        StringTokenizer strtok;
+        
         try 
         {
         	BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
-            
-            FileOutputStream outfile = new FileOutputStream("E:\\Documents\\Database\\heap.pagesize");  
+            FileOutputStream outfile = new FileOutputStream(outputLocation);  
             DataOutputStream data = new DataOutputStream(outfile);
-            
-            StringTokenizer strtok;
             
             while((line=br.readLine()) != null) 
             {
@@ -37,13 +39,12 @@ public class dbload {
             	while(strtok.hasMoreTokens())
             	{
             		regname = strtok.nextToken();
+            		byte[] byt = regname.getBytes();
+            		for(int i = 0 ; i < byt.length ; i++)
+            		{
+            			data.writeInt(byt[i]);
+            		}
             		
-                	byte[] b = regname.getBytes();
-                	
-                	for (int i = 0; i < b.length; i++) 
-                	{
-                		data.writeInt(b[i]);
-                    }
             	}
             }
             data.flush();  
@@ -51,6 +52,7 @@ public class dbload {
             System.out.println("done");
             //close all files
             br.close();
+           
         }
         catch(Exception ex) 
         {
