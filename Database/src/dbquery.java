@@ -41,9 +41,8 @@ public class dbquery {
         			String check = sb.toString().toLowerCase();
         			String keyword = search.toLowerCase().trim();
         			
-        			System.out.println(check);
         			if(check.indexOf(keyword)>=0)
-        			{System.out.println("hye");
+        			{
         				found.add(check);
         			}
         		}
