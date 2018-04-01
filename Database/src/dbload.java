@@ -9,17 +9,17 @@ public class dbload {
 
 	public static void main(String[] args) 
 	{
-		String fileLocation = "E:\\Documents\\Database\\New Text Document.txt";
+		String fileLocation = "E:\\Documents\\Database\\FormattedCSV.csv";
         String outputLocation = "E:\\Documents\\Database\\heap.pagesize";
           
         File file = new File(fileLocation);
         String regname = null;
         StringTokenizer strtok;
+        String line;
         
         try 
         {
         	BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
             FileOutputStream outfile = new FileOutputStream(outputLocation);  
             DataOutputStream data = new DataOutputStream(outfile);
             
@@ -35,7 +35,6 @@ public class dbload {
             		{
             			data.writeInt(byt[i]);
             		}
-            		
             	}
             }
             data.flush();  
