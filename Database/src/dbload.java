@@ -28,12 +28,20 @@ public class dbload {
             FileOutputStream outfile = new FileOutputStream(outputLocation);  
             DataOutputStream data = new DataOutputStream(outfile);
             
-            int pagesizes = Integer.parseInt(pagesize);
-            int size = data.size();
             
             
             while((line=br.readLine()) != null) 
             {
+            	int pagesizes = Integer.parseInt(pagesize);
+                int size = data.size();
+                
+                String newpage = "*";
+                
+                if(size >= pagesizes)
+                {
+                	data.writeUTF(newpage);
+                }
+                
             	strtok = new StringTokenizer(line, ",");
                 
             	while(strtok.hasMoreTokens())
