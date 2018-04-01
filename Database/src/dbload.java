@@ -9,6 +9,8 @@ public class dbload {
 
 	public static void main(String[] args) 
 	{
+		
+		System.out.println(args.length);
 		String fileLocation = "E:\\Documents\\Database\\FormattedCSV.csv";
         String outputLocation = "E:\\Documents\\Database\\heap.pagesize";
           
@@ -16,6 +18,7 @@ public class dbload {
         String regname = null;
         StringTokenizer strtok;
         String line;
+        
         
         try 
         {
@@ -33,7 +36,7 @@ public class dbload {
             		byte[] byt = regname.getBytes();
             		for(int i = 0 ; i < byt.length ; i++)
             		{
-            			data.writeInt(byt[i]);
+            			data.writeShort(byt[i]);
             		}
             	}
             }
