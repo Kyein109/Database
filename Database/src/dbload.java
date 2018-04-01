@@ -9,10 +9,12 @@ public class dbload {
 
 	public static void main(String[] args) 
 	{
+		String p = args[0];
+		String pagesize = args[1];
+		String FL = args[2];
 		
-		System.out.println(args.length);
-		String fileLocation = "E:\\Documents\\Database\\FormattedCSV.csv";
-        String outputLocation = "E:\\Documents\\Database\\heap.pagesize";
+		String fileLocation = FL;
+        String outputLocation = "./heap.pagesize";
           
         File file = new File(fileLocation);
         String regname = null;
@@ -25,6 +27,10 @@ public class dbload {
         	BufferedReader br = new BufferedReader(new FileReader(file));
             FileOutputStream outfile = new FileOutputStream(outputLocation);  
             DataOutputStream data = new DataOutputStream(outfile);
+            
+            int pagesizes = Integer.parseInt(pagesize);
+            int size = data.size();
+            
             
             while((line=br.readLine()) != null) 
             {
