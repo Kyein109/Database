@@ -4,67 +4,40 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class dbload {
 
 	public static void main(String[] args) 
 	{
-		String fileLocation = "E:\\Documents\\Database\\BUSINESS_NAMES_201803.csv";
-        String outputLocation = "E:\\Documents\\Database\\FormattedCSV2.csv";
+		String fileLocation = "E:\\Documents\\Database\\FormattedCSV.csv";
+        String outputLocation = "E:\\Documents\\Database\\heap.pagesize";
 
         File file = new File(fileLocation);
-        ArrayList<String> changed = new ArrayList<String>();
+        ArrayList<Byte> changed = new ArrayList<Byte>();
         
         try 
         {
         	BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
-            StringBuilder builder;
+            StringTokenizer strtok;
             
             while((line=br.readLine()) != null) 
             {
-	            builder = new StringBuilder(line);
-	            //finding index of tab to convert to commas
-	            int index = builder.indexOf("\t");
-	            
-	            //for consecutive commas
-	            int conComma = 1;
-	
-	            //converting to comma until there is no more tabs
-	            while (index >= 0) 
-	            {
-	            	//setting tab to comma
-	            	builder.setCharAt(index , ',');
-		            //get next index of tab
-		            index = builder.indexOf("\t" , index + 1);
-		            //check for consecutive tab
-		            if(index != -1)
-		            {
-		            	if(conComma == index)
-		            	{
-			            	builder.setCharAt(index , ',');
-			                //get next index of tab
-			                index = builder.indexOf("\t" , index + 1);
-		            	}
-		            }
-	            }
-	            
-	            //converting reg/dereg to reduce size
-	            int reg = builder.indexOf("Registered");
-	            int dereg = builder.indexOf("Deregistered");
-	            
-				//checking if line has registered or deregistered
-	            if(reg != -1)
-	            {
-		            builder.replace(reg , reg+10 , "1");
-	            }
-	            else if(dereg != -1)
-	            {
-	            	builder.replace(dereg , dereg+12 , "2");
-	            }
-	            
-	            //add the changed lines for output file
-	            changed.add(builder.toString());
+            	strtok = new StringTokenizer(line, ",");
+            	
+            	while(strtok.hasMoreTokens())
+            	{
+            		String regname = strtok.nextToken();
+            		String bname = strtok.nextToken();
+            		String status = strtok.nextToken();
+            		String regDT = strtok.nextToken();
+            		String cancelDT = strtok.nextToken();
+            		String renewDT = strtok.nextToken();
+            		String stateNo = strtok.nextToken();
+            		String stateofreg = strtok.nextToken();
+            		String ABN = strtok.nextToken();
+            	}
             }
             //close all files
             br.close();
