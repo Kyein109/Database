@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class dbload {
@@ -21,6 +22,15 @@ public class dbload {
         	BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             StringTokenizer strtok;
+            String regname = null;
+            String bname;
+            String status;
+            String regDT;
+            String cancelDT;
+            String renewDT;
+            String stateNo;
+            String stateofreg;
+            String ABN;
             
             while((line=br.readLine()) != null) 
             {
@@ -28,17 +38,23 @@ public class dbload {
             	
             	while(strtok.hasMoreTokens())
             	{
-            		String regname = strtok.nextToken();
-            		String bname = strtok.nextToken();
-            		String status = strtok.nextToken();
-            		String regDT = strtok.nextToken();
-            		String cancelDT = strtok.nextToken();
-            		String renewDT = strtok.nextToken();
-            		String stateNo = strtok.nextToken();
-            		String stateofreg = strtok.nextToken();
-            		String ABN = strtok.nextToken();
+            		regname = strtok.nextToken();
+            		bname = strtok.nextToken();
+            		status = strtok.nextToken();
+            		regDT = strtok.nextToken();
+            		cancelDT = strtok.nextToken();
+            		renewDT = strtok.nextToken();
+            		stateNo = strtok.nextToken();
+            		stateofreg = strtok.nextToken();
+            		ABN = strtok.nextToken();
             	}
+
+        		byte[] byt = regname.getBytes();
+        		for (byte b : byt) {
+        			System.out.println(Arrays.toString(byt));
+        		}
             }
+            System.out.println("done");
             //close all files
             br.close();
             
