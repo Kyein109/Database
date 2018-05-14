@@ -19,7 +19,7 @@ public class hashload {
 		String line;
 		StringTokenizer strtok;
 		String record = null;
-		int hash; 
+		int hash = 0; 
        
 		try 
         {
@@ -34,7 +34,7 @@ public class hashload {
 	        		record = strtok.nextToken();
 	        		hash = record.hashCode();
             	}
-	        	
+	        	outfile.write(hash);
 	        	
             }
 	        outfile.flush();  
