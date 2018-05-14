@@ -29,6 +29,7 @@ public class hashload {
 	        
 	        while((line=heapfile.readLine()) != null) 
             {
+	        	int index;
 	        	strtok = new StringTokenizer(line, "*");
 	        	while(strtok.hasMoreTokens())
             	{
@@ -36,7 +37,17 @@ public class hashload {
 	        		record = strtok.nextToken();
 	        		sb = new StringBuilder(record);
 	        		String row = sb.toString().toLowerCase();
-	        		hash = row.hashCode();
+	        		if(row.contains("Registered"))
+	        		{
+	        			index = row.indexOf("Registered");
+	        		}
+	        		else
+	        		{
+	        			index = row.indexOf("Deregistered");
+	        		}
+	        		String delete = row.substring(index);
+	        		String nameOnly = row.replace(delete, "");
+	        		hash = nameOnly.hashCode();
             	}
 	        	outfile.write(hash);
 	        	
