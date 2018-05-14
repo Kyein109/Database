@@ -18,24 +18,27 @@ public class hashload {
 		File file = new File(fileLocation);
 		String line;
 		StringTokenizer strtok;
-		
-		Hashtable< Integer, String > hash = new Hashtable< Integer, String >();
+		String record = null;
+		int hash; 
        
 		try 
         {
 			BufferedReader heapfile = new BufferedReader(new FileReader(file));
-	        FileOutputStream outfile = new FileOutputStream(outputLocation);  
-	        DataOutputStream data = new DataOutputStream(outfile);
+	        FileOutputStream outfile = new FileOutputStream(outputLocation);
 	        
 	        while((line=heapfile.readLine()) != null) 
             {
-	        	strtok = new StringTokenizer(line, ",");
-	        	
+	        	strtok = new StringTokenizer(line, "*");
+	        	while(strtok.hasMoreTokens())
+            	{
+	        		record = strtok.nextToken();
+	        		hash = record.hashCode();
+            	}
 	        	
 	        	
             }
-	        data.flush();  
-            data.close();
+	        outfile.flush();  
+	        outfile.close();
         }
 		catch(Exception ex) 
         {
