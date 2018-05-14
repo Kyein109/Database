@@ -18,6 +18,7 @@ public class hashload {
 		File file = new File(fileLocation);
 		String line;
 		StringTokenizer strtok;
+		StringBuilder sb = new StringBuilder();
 		String record = null;
 		int hash = 0; 
        
@@ -31,8 +32,11 @@ public class hashload {
 	        	strtok = new StringTokenizer(line, "*");
 	        	while(strtok.hasMoreTokens())
             	{
+	        		
 	        		record = strtok.nextToken();
-	        		hash = record.hashCode();
+	        		sb = new StringBuilder(record);
+	        		String row = sb.toString().toLowerCase();
+	        		hash = row.hashCode();
             	}
 	        	outfile.write(hash);
 	        	
