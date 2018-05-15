@@ -89,7 +89,9 @@ public class hashload {
 								//loop until an empty space is found in the file in order to place business name
 								if(reaad != null)
 								{
-									file.seek(file.getFilePointer() + 204);
+									int newSeek = (int) (file.getFilePointer() + 204);
+									System.out.println("Currently on bucket no... " + newSeek);
+									file.seek(newSeek);
 								}
 								else
 								{	

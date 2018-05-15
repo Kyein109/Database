@@ -22,7 +22,7 @@ public class hashquery {
 			
 			int hash = (query.hashCode() & 0x7fffffff);
 			int bucket = hash % 3700000;
-			file.seek(125);
+			file.seek(bucket);
 			
 			String reading = file.readLine();
 			if(reading.equals(query))
