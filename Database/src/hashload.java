@@ -94,6 +94,7 @@ public class hashload {
 								else
 								{	
 									//writing to file
+									System.out.println("Finding space for... " + BN_NAMEc);
 									file.write(bnName);file.write(bytes);
 									
 									done = false;
