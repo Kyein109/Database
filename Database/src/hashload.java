@@ -20,6 +20,7 @@ public class hashload {
 	// initialize
 	public static void main(String args[]) 
 	{
+		//this code was taken from the provided qbquery
 		int noOfRecords = 0;
 		File heapfile = new File("./heap.4096");
 		int intSize = 4;
@@ -64,37 +65,45 @@ public class hashload {
 						} 
 						else 
 						{
+							//start of personal code
+							//below function allows me to convert the byte array into a string
 							String BN_NAME = new String(bnName);
+							//removing excess from the business name
 							String BN_NAMEc = BN_NAME.replace("BUSINESS NAMES", "");
 							
+							//making sure all hash indexes are positive (makes it easier for me to load)
 							int hash = (BN_NAMEc.hashCode() & 0x7fffffff);
-							int bucket = hash % 3700000;
+							int bucket = hash % 3700000; //moduled as seen in discussion
 							
+							//converting hash to a byte to place in the file
 							byte[] bytes = new byte[4];
 							ByteBuffer.wrap(bytes).putInt(hash);
 							
+							//RAF using bucket as the pointer
 							file.seek(bucket);
-							file.writeBytes(BN_NAMEc + ":" + hash);
+							//file.writeBytes(BN_NAMEc + ":" + hash);
 							boolean done = true;
-							/*while(done == true)
+							while(done == true)
 							{
 								String reaad = file.readLine();
+								//loop until an empty space is found in the file in order to place business name
 								if(reaad != null)
 								{
-									bucket+=204;
-									file.seek(bucket);
-									System.out.print(bucket);
+									file.seek(file.getFilePointer() + 204);
 								}
 								else
-								{	System.out.println(BN_NAMEc);
+								{	
+									//writing to file
 									file.write(bnName);file.write(bytes);
 									
 									done = false;
 								}
 								
-							}*/
+							}
 							
-							//writer.write(BN_NAMEc + ":" + hash);
+
+
+							//rest are from dbquery
 							
 							recordLen += RECORD_SIZE;
 						}
