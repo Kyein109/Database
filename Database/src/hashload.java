@@ -103,7 +103,7 @@ public class hashload {
 							
 
 
-							//rest are from dbquery
+							//rest are from dbquerya
 							
 							recordLen += RECORD_SIZE;
 						}
